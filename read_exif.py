@@ -82,9 +82,12 @@ def get_exif_string(filename,time_flag=False):
     if 'Flash' in exif_values.keys():
         if not Flag:
             exif_string=exif_string[:-17]
+            Flag=True
         Flash = 'No Flash' if exif_values['Flash']==0 else 'Flash'
         exif_string = '%s with %s'% (exif_string,Flash)
-
+    if not Flag:
+        exif_string=exif_string[:-17]
+        Flag=True
 
     if 'ApertureValue' in exif_values.keys():
         ApertureValue = exif_values['ApertureValue']
