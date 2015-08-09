@@ -38,8 +38,9 @@ nbproject
 validation-status.json
 validation-report.json
 
-# Keys File
-Tumblr_Keys
+# File
+/Captions.csv
+/Tumblr_Keys
 
 
 # Folders to ignore
