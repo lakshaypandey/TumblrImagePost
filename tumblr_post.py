@@ -89,6 +89,6 @@ if __name__ == '__main__':
         print 'Tags : ' , i['Tags']
         if not BatchProcess:
             raw_input("Press Enter to Continue")
-        #client.create_photo(Keys['blogname'], state="draft", tags=i['Tags'],  data=i['Path'],caption =i['Caption'])
+        client.create_photo(Keys['blogname'], state="draft", tags=i['Tags'],  data=i['Path'],caption =i['Caption'])
         print 'Done for ',i['Path']
         print '-'*30
