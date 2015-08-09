@@ -14,7 +14,7 @@ if __name__ == '__main__':
     State='draft'
     FileColumnSeparator= '|'
     FileTagsSeparator= ','
-    
+
     if len(sys.argv)>1:
         if 'batch' in sys.argv:
             BatchProcess=True
@@ -66,7 +66,7 @@ if __name__ == '__main__':
         for i in data[1:]:
             ImagePath=os.path.join(Image_Folder,i.split(FileColumnSeparator)[0])
             Caption = i.split(FileColumnSeparator)[1] + '\n' + exif.get_exif_string(ImagePath)
-            Tags=i.split(FileColumnSeparator)[2].split(FileTagsSeparator)
+            Tags=i.rstrip().split(FileColumnSeparator)[2].split(FileTagsSeparator)
             #Image_Block =
             ImageList.append({'Path' : ImagePath, 'Caption' : Caption ,'Tags' : Tags})
     else:
@@ -74,7 +74,7 @@ if __name__ == '__main__':
             ImagePath=os.path.join(Image_Folder,i.split(FileColumnSeparator)[0])
             Exif = exif.get_exif_string(ImagePath,True)
             Caption = i.split(FileColumnSeparator)[1] + '\n' + Exif[0]
-            Tags=i.split(FileColumnSeparator)[2].split(FileTagsSeparator)
+            Tags=i.rstrip().split(FileColumnSeparator)[2].split(FileTagsSeparator)
             #Image_Block =
             ImageList.append([Exif[1],{'Path' : ImagePath, 'Caption' :Caption,'Tags' : Tags }])
         ImageList = sorted(ImageList, key=itemgetter(0))
@@ -82,13 +82,13 @@ if __name__ == '__main__':
         for i in ImageList:
             temp.append(i[1])
         ImageList=temp
-    
+
     for i in ImageList:
         print 'Posting : ', i['Path']
         print 'Caption : ', i['Caption']
         print 'Tags : ' , i['Tags']
         if not BatchProcess:
             raw_input("Press Enter to Continue")
-        client.create_photo(Keys['blogname'], state="draft", tags=i['Tags'],  data=i['Path'],caption =i['Caption'])
+        #client.create_photo(Keys['blogname'], state="draft", tags=i['Tags'],  data=i['Path'],caption =i['Caption'])
         print 'Done for ',i['Path']
         print '-'*30

@@ -86,9 +86,10 @@ def get_exif_string(filename,time_flag=False):
         exif_string = '%s with %s'% (exif_string,Flash)
 
 
-
-    ApertureValue = exif_values['ApertureValue']
-    MaxApertureValue = exif_values['MaxApertureValue']
+    if 'ApertureValue' in exif_values.keys():
+        ApertureValue = exif_values['ApertureValue']
+    if 'MaxApertureValue' in exif_values.keys():
+        MaxApertureValue = exif_values['MaxApertureValue']
 
     ##Formatting the exif string here
     if time_flag:
