@@ -14,7 +14,7 @@ if __name__ == '__main__':
     State='draft'
     FileColumnSeparator= '|'
     FileTagsSeparator= ','
-    BlogName = 'photoblog.lakshaypandey.com'
+    
     if len(sys.argv)>1:
         if 'batch' in sys.argv:
             BatchProcess=True
@@ -82,7 +82,7 @@ if __name__ == '__main__':
         for i in ImageList:
             temp.append(i[1])
         ImageList=temp
-    #print client.blog_info('photoblog.lakshaypandey.com')
+    
     for i in ImageList:
         print 'Posting : ', i['Path']
         print 'Caption : ', i['Caption']
