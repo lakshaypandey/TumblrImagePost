@@ -28,7 +28,7 @@ Blog path is the url or your blog or the custom url if you have one
 3 optional parameters here
 sort, batch and state
 
-* **sort : ** sorts the images based on their Time
-* **batch : ** process all the images without it asks for key press for every Images
-* **state : ** defines the state of the post when posted
-* should be on of **published private draft ** default is set to draft
+* **sort** :  sorts the images based on their Time
+* **batch** :  process all the images without it asks for key press for every Images
+* **state** : defines the state of the post when posted
+* should be on of **published private draft** default is set to draft
