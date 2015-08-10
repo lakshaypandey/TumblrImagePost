@@ -26,9 +26,6 @@ if __name__ == '__main__':
             State='private'
         elif 'draft' in sys.argv:
             State='draft'
-
-    print State
-
     Image_Folder =os.path.join(os.getcwd(),'Images')
 
     #Get Consumer key and secret from Tumblr_Keys
@@ -65,7 +62,7 @@ if __name__ == '__main__':
     if not SortByTime:
         for i in data[1:]:
             ImagePath=os.path.join(Image_Folder,i.split(FileColumnSeparator)[0])
-            Caption = i.split(FileColumnSeparator)[1] + '\n' + exif.get_exif_string(ImagePath)
+            Caption = i.split(FileColumnSeparator)[1] + ' <br> ' + exif.get_exif_string(ImagePath)
             Tags=i.rstrip().split(FileColumnSeparator)[2].split(FileTagsSeparator)
             #Image_Block =
             ImageList.append({'Path' : ImagePath, 'Caption' : Caption ,'Tags' : Tags})
@@ -73,7 +70,7 @@ if __name__ == '__main__':
         for i in data[1:]:
             ImagePath=os.path.join(Image_Folder,i.split(FileColumnSeparator)[0])
             Exif = exif.get_exif_string(ImagePath,True)
-            Caption = i.split(FileColumnSeparator)[1] + '\n' + Exif[0]
+            Caption = i.split(FileColumnSeparator)[1] + '<br>' + Exif[0]
             Tags=i.rstrip().split(FileColumnSeparator)[2].split(FileTagsSeparator)
             #Image_Block =
             ImageList.append([Exif[1],{'Path' : ImagePath, 'Caption' :Caption,'Tags' : Tags }])
@@ -89,6 +86,6 @@ if __name__ == '__main__':
         print 'Tags : ' , i['Tags']
         if not BatchProcess:
             raw_input("Press Enter to Continue")
-        #client.create_photo(Keys['blogname'], state="draft", tags=i['Tags'],  data=i['Path'],caption =i['Caption'])
+        client.create_photo(Keys['blogname'], state="draft", tags=i['Tags'],  data=i['Path'],caption =i['Caption'])
         print 'Done for ',i['Path']
         print '-'*30

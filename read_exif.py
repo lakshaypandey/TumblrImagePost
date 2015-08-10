@@ -1,6 +1,6 @@
 
 import exifread
-
+import time
 from PIL import Image
 from fractions import Fraction
 from PIL.ExifTags import TAGS
@@ -47,8 +47,9 @@ def get_exif_string(filename,time_flag=False):
     exif_values= read_image(filename)
     LensModel,EffFocalLength = read_lensmodel(filename)
     if 'DateTimeOriginal' in exif_values:
-        Time = exif_values['DateTimeOriginal'][:-3]
-        exif_string = 'Taken on %s'%(str(Time))
+        Time = time.strptime( exif_values['DateTimeOriginal'],"%Y:%m:%d %H:%M:%S")
+        Frmt_Time= time.strftime("%d-%m-%Y %H:%M", Time)
+        exif_string = 'Taken on %s'%(str(Frmt_Time))
     else:
         exif_string = 'Taken'
     if 'Model' in exif_values:
@@ -83,8 +84,8 @@ def get_exif_string(filename,time_flag=False):
         if not Flag:
             exif_string=exif_string[:-17]
             Flag=True
-        Flash = 'No Flash' if exif_values['Flash']==0 else 'Flash'
-        exif_string = '%s with %s'% (exif_string,Flash)
+        Flash = '' if exif_values['Flash']==0 else 'with Flash'
+        exif_string = '%s %s'% (exif_string,Flash)
     if not Flag:
         exif_string=exif_string[:-17]
         Flag=True
